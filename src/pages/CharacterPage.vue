@@ -165,7 +165,12 @@
 export default {
   name: 'Character',
   setup() {
-    return {}
+    const state = ({
+      newCharacter: {}
+    })
+    return {
+      state
+    }
   },
   components: {}
 }
