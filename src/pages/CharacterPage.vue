@@ -8,7 +8,16 @@
       </div>
       <div class="col-3">
         <div class="card shadow-sm">
-          Heritage
+          <div class="container-fluid">
+            <div class="row">
+              <button @click="rollHeritage" class="col-8 btn-primary">
+                Heritage
+              </button>
+              <div class="col-4">
+                Test
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-3">
@@ -36,7 +45,7 @@
         </div>
       </div>
       <div class="col-8">
-        <div class="card shadow-sm">
+        <div class="card shadow-sm text-center">
           Ability Scores
         </div>
         <div class="row">
@@ -162,6 +171,8 @@
 </template>
 
 <script>
+import { charactersService } from '../services/CharactersService'
+
 export default {
   name: 'Character',
   setup() {
@@ -169,7 +180,10 @@ export default {
       newCharacter: {}
     })
     return {
-      state
+      state,
+      async rollHeritage() {
+        await charactersService.rollDice(1, 6)
+      }
     }
   },
   components: {}
