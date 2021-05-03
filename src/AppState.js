@@ -4,6 +4,10 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   account: {},
+  numRolled: {},
+  character: {
+    occupation: {}
+  },
 
   request: {
     jsonrpc: '2.0',

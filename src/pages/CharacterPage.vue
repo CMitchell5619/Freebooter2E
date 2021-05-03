@@ -21,8 +21,17 @@
         </div>
       </div>
       <div class="col-3">
-        <div class="card shadow-sm">
-          Occupation
+        <div class="card shadow-sm" @click="rollOccupation">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-6 btn-primary">
+                Occupation
+              </div>
+              <div class="col-6">
+                {{ state.character.occupation }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -171,18 +180,29 @@
 </template>
 
 <script>
+import { computed, onMounted } from 'vue'
+import { AppState } from '../AppState'
 import { charactersService } from '../services/CharactersService'
 
 export default {
   name: 'Character',
   setup() {
     const state = ({
-      newCharacter: {}
+      character: computed(() => AppState.character),
+      numRolled: computed(() => AppState.numRolled)
+    })
+    onMounted(() => {
+      AppState.character = {}
     })
     return {
       state,
       async rollHeritage() {
-        await charactersService.rollDice(1, 6)
+        await charactersService.rollDice(1, 1, 6)
+        await charactersService.setHeritage()
+      },
+      async rollOccupation() {
+        // await charactersService.rollDice(1, 1, 6)
+        await charactersService.setOccupation()
       }
     }
   },
